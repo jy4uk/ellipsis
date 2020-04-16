@@ -1,3 +1,9 @@
+<?php
+require('connectdb.php');
+require('home-db.php');
+
+// $action = "list_tasks";        // default action
+?>
 <!DOCTYPE HTML>
 <!--
 	Phantom by HTML5 UP
@@ -22,7 +28,7 @@
 
 							<!-- Logo --> 
 								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis...</span>
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
 								</a>
 
 							<!-- Nav -->
@@ -56,7 +62,13 @@
 								 Head to your profile to start a story of your own! </p>
 							</header>
 							<section class="tiles">
-								<article class="style1">
+								<?php
+									if($_SERVER['REQUEST_METHOD'] == 'GET') {
+										$stories = getAllStories();
+										include('home-story-view.php');
+									}
+								?>
+								<!-- <article class="style1">
 									<span class="image">
 										<img src="images/pic01.jpg" alt="" />
 									</span>
@@ -121,7 +133,7 @@
 											<p>Short and Sweet</p>
 										</div>
 									
-								</article>
+								</article> -->
 							</section>
 						</div>
 					</div>
