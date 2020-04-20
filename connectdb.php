@@ -7,16 +7,17 @@
 /******************************/
 // connecting to DB on XAMPP (local)
 
-$host = 'localhost';           // hostname
-$dbname = 'ellipsis_final';     // database name
+$host = '35.245.0.193';           // hostname
+$port = '3306';            // port
+$dbname = 'master_db';     // database name
 
 // database credentials
-$username = 'ellipsis_user1';
-$password = 'password';
+$username = 'masteraccess';
+$password = 'password12345';
 
 /******************************/
 
-$dsn = "mysql:host=$host;dbname=$dbname";
+$dsn = "mysql:host=$host;port=$port;dbname=$dbname";
 $db = "";
 
 /** connect to the database **/
