@@ -1,3 +1,8 @@
+<?php
+require('connectdb.php');
+// require('mypage-db.php');
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -8,6 +13,9 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
+        <!-- Session Start -->
+        <?php session_start(); ?>
+
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -41,3 +49,59 @@
 							<li><a href="generic.html">Donate</a></li>
 						</ul>
 					</nav>
+            </div>
+
+            <?php
+                if ($_SERVER['REQUEST_METHOD'] == 'GET')
+                {
+                    include('mypage-db.php');
+                    echo "<hr/>";
+                    $user = getUser($_SESSION['user']);
+                   include('mypage-view.php');        // default action
+                }
+                else if ($_SERVER['REQUEST_METHOD'] == 'POST')
+                {
+                    if (!empty($_POST['action']) && ($_POST['action'] == 'Change Display Name'))
+                    {
+                        include('mypage-update-displayname.php');
+                        if (!empty($_POST['displayname']))
+                        {
+                            updateDisplayName($_POST['username'], $_POST['displayname']);
+                            header("Location: home.php");//mypage.php?action=updated_display_name
+                        }
+                    }
+                    else if (!empty($_POST['action']) && ($_POST['action'] == 'Change Bio'))
+                    {
+                        include('mypage-update-bio.php');
+                        if (!empty($_POST['bio']))
+                        {
+                            updateBio($_POST['username'], $_POST['bio']);
+                            header("Location: home.php");
+                        }
+                    }
+                    else if (!empty($_POST['action']) && ($_POST['action'] == 'Update Email'))
+                    {
+                        include('mypage-update-email.php');
+                        if (!empty($_POST['email']))
+                        {
+                            updateBio($_POST['username'], $_POST['email']);
+                            header("Location: home.php");
+                        }
+                    }
+                    else if (!empty($_POST['action']) && ($_POST['action'] == 'Delete Account'))
+                    {
+                        if (!empty($_POST['task_id']) )
+                        {
+                            deleteUser($_POST['username']);
+                            header("Location: home.php");
+                        }
+                    }
+                }
+            ?>
+
+        <!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
