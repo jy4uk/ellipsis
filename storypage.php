@@ -1,3 +1,7 @@
+<?php
+require('connectdb.php');
+require('story-db.php');
+?>
 <!DOCTYPE HTML>
 <!--
 	Phantom by HTML5 UP
@@ -6,7 +10,7 @@
 -->
 <html>
 	<head>
-		<title>Example Story Page</title>
+		<title><?php echo $_GET['title'] ?></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -49,11 +53,18 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Example Story Page</h1>
-							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-							<p>This is where added story text would be pulled from the database and displayed</p>
-							<p>More story stuff blah blah blah.</p>
-							<p>Later story stuff blah blah blah.</p>
+							<h1><?php echo $_GET['title'] ?></h1>
+							<h3><?php echo 'By: ' . $_GET['author_display'] ?> </h3>
+							<!-- <span class="image main"><img src="images/pic13.jpg" alt="" /></span> -->
+							<?php
+							$pieces = getStoryPieces($_GET['storyID']);
+							$whole_story = '';
+							foreach ($pieces as $piece):
+								//echo $piece[0];
+								$whole_story .= ' ' . $piece[0];
+							endforeach;
+							echo '<p>' . $whole_story . '</p>';
+							?>
 						</div>
 					</div>
 

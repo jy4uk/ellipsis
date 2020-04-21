@@ -2,7 +2,7 @@
 
 function getAllStories() {
     global $db;
-    $query = "SELECT title FROM story";
+    $query = "SELECT storyID, title FROM story";
     $statement = $db->prepare($query);
     // $statement->bindValue(':user', $user);
     $statement->execute();
@@ -16,4 +16,16 @@ function getAllStories() {
     return $results;
 }
 
+function getStoryAuthor(int $storyID) {
+    global $db;
+    $query = "SELECT display_name, username FROM user NATURAL JOIN `create` WHERE storyID = $storyID";
+    $statement = $db->prepare($query);
+    $statement->execute();
+
+    $results = $statement->fetchAll();
+
+    $statement->closecursor();
+
+    return $results;
+}
 ?>
