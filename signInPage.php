@@ -92,7 +92,7 @@ require('signInPage-db.php');
                         if($passwordIsCorrect){
                             $_SESSION['user'] = $user;
                             $_SESSION['pwd'] = $hash_pwd;
-                            header('Location: home.php');
+                            header('Location: mypage.php');
                         }
                         else{
                             reject('password');
