@@ -61,13 +61,21 @@ require('connectdb.php');
                 }
                 else if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 {
+                    include('mypage-db.php');
+                    echo "<hr/>";
+                    $user = getUser($_SESSION['user']);
+                    $username = '';
+                    foreach($user as $u):
+                        $username = $u['username'];
+                    endforeach;
+
                     if (!empty($_POST['action']) && ($_POST['action'] == 'Change Display Name'))
                     {
                         include('mypage-update-displayname.php');
                         if (!empty($_POST['displayname']))
                         {
-                            updateDisplayName($_POST['username'], $_POST['displayname']);
-                            header("Location: home.php");//mypage.php?action=updated_display_name
+                            updateDisplayName($username, $_POST['displayname']);
+                            header("Location: mypage.php?action=updated_display_name");//
                         }
                     }
                     else if (!empty($_POST['action']) && ($_POST['action'] == 'Change Bio'))
@@ -75,8 +83,8 @@ require('connectdb.php');
                         include('mypage-update-bio.php');
                         if (!empty($_POST['bio']))
                         {
-                            updateBio($_POST['username'], $_POST['bio']);
-                            header("Location: home.php");
+                            updateBio($username, $_POST['bio']);
+                            header("Location: mypage.php?action=updated_bio");
                         }
                     }
                     else if (!empty($_POST['action']) && ($_POST['action'] == 'Update Email'))
@@ -84,16 +92,16 @@ require('connectdb.php');
                         include('mypage-update-email.php');
                         if (!empty($_POST['email']))
                         {
-                            updateBio($_POST['username'], $_POST['email']);
-                            header("Location: home.php");
+                            updateEmail($username, $_POST['email']);
+                            header("Location: mypage.php?action=updated_email");
                         }
                     }
                     else if (!empty($_POST['action']) && ($_POST['action'] == 'Delete Account'))
                     {
                         if (!empty($_POST['task_id']) )
                         {
-                            deleteUser($_POST['username']);
-                            header("Location: home.php");
+                            deleteTask($username);
+                            header("Location: signInPage.php");
                         }
                     }
                 }

@@ -22,7 +22,7 @@
     <br/>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
         <input type="submit" value="Change Display Name" name="action" class="btn btn-primary" />   
-        <input type="hidden" name="username" value="<?php echo $u['username'] ?>" />          
+        <input type="hidden" name="username" value="<?php echo $u['username']; ?>" />          
     </form> 
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
         <input type="submit" value="Change Bio" name="action" class="btn btn-primary" />             

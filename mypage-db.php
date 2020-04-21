@@ -19,7 +19,7 @@ function updateDisplayName($username, $displayname) {
 	$statement->bindValue(':displayname', $displayname);
 	$statement->bindValue(':username', $username);
 	$statement->execute();
-    $statement->closeCursor();
+    $statement->closecursor();
 }
 
 function updateBio($user, $bio) {
@@ -42,11 +42,13 @@ function updateEmail($user, $email) {
 	$statement->closeCursor();
 }
 
-function deleteUser($user) {
+function deleteAccount($user)
+{
 	global $db;
-	$query = "DELETE FROM user WHERE username=:username";
+	
+	$query = "DELETE FROM user WHERE username=:user";
 	$statement = $db->prepare($query);
-	$statement->bindValue(':username', $user);
+	$statement->bindValue(':user', $user);
 	$statement->execute();
 	$statement->closeCursor();
 }

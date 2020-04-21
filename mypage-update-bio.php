@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Welcome </title>
+		<title>Change Bio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -15,7 +15,7 @@
                         <label for="bio">New Bio: </label>
                         <input type="text" name="bio" class="form-control" name="bio" />
                     </div> 
-                    <input type="submit" value="Update" name="action"  class="btn btn-dark" title="Update Bio" />   
+                    <input type="submit" value="Change Bio" name="action"  class="btn btn-dark" title="Change Bio" />   
                 </form>
 
             </div>
