@@ -43,12 +43,12 @@ function checkPasswordToUser($username, $password)
     $results = $statement->fetch();
 
     // $hash_results = password_hash($results[0], PASSWORD_DEFAULT);
-    // echo $hash_results . "<br/>";
-    // echo $password;
+    //echo $hash_results . "<br/>";
+    //echo $password;
     $statement->closecursor();
     $hashpwd = $results[0];
-    echo $hashpwd . "<br/>";
-    echo $password;
+    //echo $hashpwd . "<br/>";
+    //echo $password;
     if($password == $hashpwd) {
         return true;
     }
@@ -59,7 +59,8 @@ function checkPasswordToUser($username, $password)
 	// return $results;
 }
 
-function newUserSignUp($username, $hashed_pw) {
+
+function newUserSignUp($username, $hashed_pw, $name, $email_address) {
     global $db;
 
     $query = "SELECT username FROM user where username = :username";
@@ -72,11 +73,13 @@ function newUserSignUp($username, $hashed_pw) {
     //if username doesn't already exist/is not already in use
     if($results == '') {
         //insert into table
-        $query = "INSERT INTO user (username, password) VALUES (:username, :password)";
+        $query = "INSERT INTO user (username, password, display_name, email_address) VALUES (:username, :password, :name, :email_addresss)";
 	
         $statement = $db->prepare($query);
         $statement->bindValue(':username', $username);
         $statement->bindValue(':password', $hashed_pw);
+        $statement->bindValue(':name', $name);
+        $statement->bindValue(':email_address', $email_address);
         $statement->execute();
         $statement->closeCursor();
 
@@ -84,5 +87,4 @@ function newUserSignUp($username, $hashed_pw) {
     }
     return "user found";
 }
-
 ?>
