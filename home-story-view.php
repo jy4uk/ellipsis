@@ -9,16 +9,23 @@
 </head>
 <body>
     <?php foreach ($stories as $story): ?>
+        <?php $author = getStoryAuthor($story['storyID']) ?>
         <article class="style2">
             <span class="image">
                 <img src="images/pic02.jpg" alt="" />
             </span>
-            <a href="storypage.php">
-                <h2><?php echo $story['title']; ?></h2>
+            <?php
+            $storyID = $story['storyID'];
+            $title = $story['title'];
+            $author_name = $author[0]['display_name'];
+            $author_user = $author[0]['username'];
+            echo '<a href="storypage.php?storyID=' . $storyID . '&title=' . $title . '&author_display=' . $author_name . '&author_user=' . $author_user . '">
+                <h2>' . $story['title'] . '</h2>
                 <div class="content">
-                    <p>Description</p>
+                    <p>By: ' . $author_name . ' (' . $author_user . ')</p>
                 </div>
-            </a>
+            </a>';
+            ?>
         </article>
     <?php endforeach; ?>
 </body>
