@@ -1,6 +1,7 @@
 <?php
 require('connectdb.php');
 require('home-db.php');
+require('signOut.php');
 
 // $action = "list_tasks";        // default action
 ?>
@@ -50,6 +51,12 @@ require('home-db.php');
 							<li><a href="mypage.php">My Page</a></li>
 							<li><a href="generic.html">FAQ</a></li>
 							<li><a href="generic.html">Donate</a></li>
+							<li><a href="signOut.php?logout=1">Log Out</a></li>		
+							<?php
+							if(isset($_GET['logout'])){
+								session_unset();
+								session_destroy();
+							}?>					
 						</ul>
 					</nav>
 
