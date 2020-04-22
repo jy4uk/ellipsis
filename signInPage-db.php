@@ -29,26 +29,15 @@ function getUser_by_username($username)
 
 function checkPasswordToUser($username, $password)
 {
-    return true;
-    // echo "entered checkPasswordToUser function";
 	global $db;
-	
-	// echo "in getTaskInfo_by_id " . $id ;
-	
+
 	$query = "SELECT password FROM user where username = :username";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':username', $username);
 	$statement->execute();
-	
     $results = $statement->fetch();
-
-    // $hash_results = password_hash($results[0], PASSWORD_DEFAULT);
-    //echo $hash_results . "<br/>";
-    //echo $password;
     $statement->closecursor();
     $hashpwd = $results[0];
-    //echo $hashpwd . "<br/>";
-    //echo $password;
     if($password == $hashpwd) {
         return true;
     }
@@ -56,7 +45,6 @@ function checkPasswordToUser($username, $password)
         return false;
     }
 	return false;
-	// return $results;
 }
 
 

@@ -80,6 +80,7 @@ require('signInPage-db.php');
             else{
                 if(isset($_POST['Password'])){
                     $pass = trim($_POST['Password']);
+                    //$hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
                     //if the password is not comprised of exclusively alphanumeric characters, reject it
                     if(!ctype_alnum($pass)){
@@ -87,12 +88,13 @@ require('signInPage-db.php');
                     }
                     //password is all alphanumeric and we now check to make sure it corresponds to the password stored in the db for the given username
                     else{
+                        #password correct check
                         $passwordIsCorrect = checkPasswordToUser($user, $pass);
 
                         if($passwordIsCorrect){
                             $_SESSION['user'] = $user;
-                            $_SESSION['pwd'] = $hash_pwd;
-                            header('Location: mypage.php');
+                            $_SESSION['pass'] = $pass;
+                            header('Location: home.php');
                         }
                         else{
                             reject('password');
