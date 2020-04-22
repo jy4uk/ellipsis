@@ -1,6 +1,20 @@
 <?php
 require('connectdb.php');
 require('story-db.php');
+
+session_start();
+
+if ( isset( $_SESSION['user']) ) {
+    $style1 = "style='display:none;'";
+    $style2 = NULL;
+} else {
+    $style1 = NULL;
+     $style2 = "style='display:none;'";
+}
+
+$story_details = getStoryDetails($_GET['storyID']);
+$title = $story_details[0]['title'];
+$author_display = $story_details[0]['display_name'];
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -10,7 +24,7 @@ require('story-db.php');
 -->
 <html>
 	<head>
-		<title><?php echo $_GET['title'] ?></title>
+		<title><?php echo $title ?></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -29,6 +43,8 @@ require('story-db.php');
 									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
 								</a>
 
+								<a href="create-story.php" class="logo" style="float: right;"><span class="title" <?php echo $style2; ?>>Create Story</span></a>
+
 							<!-- Nav -->
 								<nav>
 									<ul>
@@ -44,18 +60,19 @@ require('story-db.php');
 						<h2>Menu</h2>
 						<ul>
                             <li><a href="home.php">Home</a></li>
-							<li><a href="mypage.php">My Page</a></li>
-							<li><a href="generic.html">FAQ</a></li>
-							<li><a href="generic.html">Donate</a></li>
+							<li><a href="signInPage.php" <?php echo $style1;?>>Sign In</a></li>
+							<li><a href="mypage.php"<?php echo $style2; ?>>My Page</a></li>
+							<li><a href="signOut.php?logout=1"<?php echo $style2; ?>>Log Out</a></li>
 						</ul>
 					</nav>
 
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1><?php echo $_GET['title'] ?></h1>
-							<h3><?php echo 'By: ' . $_GET['author_display'] ?> </h3>
-							<!-- <span class="image main"><img src="images/pic13.jpg" alt="" /></span> -->
+							<h1><?php echo $title ?></h1>
+							<h2><?php echo 'By: ' . $author_display ?> </h2>
+							<strong>Story Text:</strong>
+							<br></br>
 							<?php
 							$pieces = getStoryPieces($_GET['storyID']);
 							$whole_story = '';

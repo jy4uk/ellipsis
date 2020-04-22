@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php foreach ($stories as $story): ?>
-        <?php $author = getStoryAuthor($story['storyID']) ?>
+        <?php $details = getStoryDetails($story['storyID']) ?>
         <article class="style2">
             <span class="image">
                 <img src="images/pic02.jpg" alt="" />
@@ -17,9 +17,9 @@
             <?php
             $storyID = $story['storyID'];
             $title = $story['title'];
-            $author_name = $author[0]['display_name'];
-            $author_user = $author[0]['username'];
-            echo '<a href="storypage.php?storyID=' . $storyID . '&title=' . $title . '&author_display=' . $author_name . '&author_user=' . $author_user . '">
+            $author_name = $details[0]['display_name'];
+            $author_user = $details[0]['username'];
+            echo '<a href="storypage.php?storyID=' . $storyID . '">
                 <h2>' . $story['title'] . '</h2>
                 <div class="content">
                     <p>By: ' . $author_name . ' (' . $author_user . ')</p>

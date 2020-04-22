@@ -42,9 +42,6 @@ require('signUp-db.php');
 						<ul>
                             <li><a href="home.php">Home</a></li>
 							<li><a href="signInPage.php">Sign In</a></li>
-                            <li><a href="mypage.php">My Page</a></li>
-							<li><a href="generic.html">FAQ</a></li>
-							<li><a href="generic.html">Donate</a></li>
                             
 						</ul>
 					</nav>

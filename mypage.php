@@ -25,8 +25,9 @@ require('connectdb.php');
 
 							<!-- Logo -->
 								<a href="home.php" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
-								</a>
+                                    <span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
+                                </a>
+                                <a href="create-story.php" class="logo" style="float: right;"><span class="title">Create Story</span></a>
 
 							<!-- Nav -->
 								<nav>
@@ -43,10 +44,8 @@ require('connectdb.php');
 						<h2>Menu</h2>
 						<ul>
                             <li><a href="home.php">Home</a></li>
-                            <li><a href="signInPage.php">Sign In</a></li>
 							<li><a href="mypage.php">My Page</a></li>
-							<li><a href="generic.html">FAQ</a></li>
-							<li><a href="generic.html">Donate</a></li>
+                            <li><a href="signOut.php?logout=1">Log Out</a></li>
 						</ul>
 					</nav>
             </div>

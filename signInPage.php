@@ -20,7 +20,6 @@ require('signInPage-db.php');
 				<!-- Header -->
 					<header id="header">
 						<div class="inner">
-
 							<!-- Logo -->
 								<a href="home.php" class="logo">
 									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
@@ -43,9 +42,6 @@ require('signInPage-db.php');
 						<ul>
                             <li><a href="home.php">Home</a></li>
 							<li><a href="signInPage.php">Sign In</a></li>
-                            <li><a href="mypage.php">My Page</a></li>
-							<li><a href="generic.html">FAQ</a></li>
-							<li><a href="generic.html">Donate</a></li>
                             
 						</ul>
 					</nav>
