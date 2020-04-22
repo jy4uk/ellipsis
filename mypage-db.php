@@ -67,5 +67,59 @@ function getUserStories($user) {
 
     return $results;
 }
+function getUserLikes($user){
+	global $db;
+    $query = "SELECT * FROM `like` NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':user', $user);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results;
+}
 
+function getUserDislikes($user){
+	global $db;
+    $query = "SELECT * FROM `dislike` NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':user', $user);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results;
+}
+
+
+function getUserComments($user){
+	global $db;
+    $query = "SELECT * FROM `comment` NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':user', $user);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results;
+}
+
+function getUserFollows($user){
+	global $db;
+    $query = "SELECT * FROM `follow` NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':user', $user);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results;
+}
+
+function getCreator($storyID){
+	global $db;
+	$query = "SELECT username FROM `create` WHERE storyID = :storyid";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':storyid', $storyID);
+	$statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results[0]['username'];
+}
 ?>
