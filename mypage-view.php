@@ -9,13 +9,13 @@
         </head>
 <body>
   
-  <div class="container" style="padding: 1.5em;">
+  <div class="container" style="padding: 2em;">
     <div style="color: black;">
         <?php foreach($user as $u):
-            echo $u['display_name'] . "'s Account Info:" . "<br/>";
-            echo "Username: " . $u['username'] . "<br/>";
-            echo "Bio: " . $u['bio'] . "<br/>";
-            echo "Email: " . $u['email_address'] . "<br/>";
+            echo '<h1>' . $u['display_name'] . "'s Account Info:" . '</h1>';
+            echo '<strong> Username: </strong> ' . $u['username'] . '</br>';
+            echo '<strong> Bio: </strong>' . $u['bio'] . '</br>';
+            echo '<strong> Email: </strong>' . $u['email_address'] . '</br>';
         
         ?>
     </div>

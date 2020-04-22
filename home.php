@@ -1,7 +1,19 @@
 <?php
 require('connectdb.php');
 require('home-db.php');
-require('signOut.php');
+require('story-db.php');
+//require('signOut.php');
+
+session_start();
+
+if ( isset( $_SESSION['user']) ) {
+    $style1 = "style='display:none;'";
+    $style2 = NULL;
+} else {
+    $style1 = NULL;
+     $style2 = "style='display:none;'";
+    //  header('Location: signInPage.php');
+}
 
 // $action = "list_tasks";        // default action
 ?>
@@ -31,6 +43,7 @@ require('signOut.php');
 								<a href="home.php" class="logo">
 									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
 								</a>
+								<a href="create-story.php" class="logo" style="float: right;"><span class="title" <?php echo $style2; ?>>Create Story</span></a>
 
 							<!-- Nav -->
 								<nav>
@@ -44,14 +57,13 @@ require('signOut.php');
 
 				<!-- Menu -->
 					<nav id="menu">
-						<h2>Menu</h2>
+						<h2 <?php echo $style1; ?> >Hello!</h2>
+						<h2 <?php echo $style2; ?>>Hello, <?php echo $_SESSION['user']; ?>!</h2>
 						<ul>
 							<li><a href="home.php">Home</a></li>
-							<li><a href="signInPage.php">Sign In</a></li>
-							<li><a href="mypage.php">My Page</a></li>
-							<li><a href="generic.html">FAQ</a></li>
-							<li><a href="generic.html">Donate</a></li>
-							<li><a href="signOut.php?logout=1">Log Out</a></li>		
+							<li><a href="signInPage.php" <?php echo $style1;?>>Sign In</a></li>
+							<li><a href="mypage.php"<?php echo $style2; ?>>My Page</a></li>
+							<li><a href="signOut.php?logout=1"<?php echo $style2; ?>>Log Out</a></li>
 							<?php
 							if(isset($_GET['logout'])){
 								session_unset();
