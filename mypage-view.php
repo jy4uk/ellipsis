@@ -38,6 +38,12 @@
     </form>
     
     <?php endforeach; ?>
+    <br/>
+    <h2 style="color:black">Stories You Created</h2>
+        <?php foreach($stories as $s): ?>
+            <li><a href="storypage.php"><?php echo $s['title']?></li>
+        <?php endforeach; ?>
+
   </div>
   
   

@@ -53,4 +53,19 @@ function deleteAccount($user)
 	$statement->closeCursor();
 }
 
+function getUserStories($user) {
+	global $db;
+    $query = "SELECT title FROM story NATURAL JOIN `create` WHERE user = :user";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':user', $user);
+
+    $statement->execute();
+
+    $results = $statement->fetchAll();
+
+    $statement->closecursor();
+
+    return $results;
+}
+
 ?>

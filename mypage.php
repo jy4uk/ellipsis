@@ -57,6 +57,12 @@ require('connectdb.php');
                     include('mypage-db.php');
                     echo "<hr/>";
                     $user = getUser($_SESSION['user']);
+                    $username = '';
+                    foreach($user as $u):
+                        $username = $u['username'];
+                    endforeach;
+                    
+                    $stories = getUserStories($username);
                    include('mypage-view.php');        // default action
                 }
                 else if ($_SERVER['REQUEST_METHOD'] == 'POST')
