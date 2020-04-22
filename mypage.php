@@ -60,7 +60,10 @@ require('connectdb.php');
                     foreach($user as $u):
                         $username = $u['username'];
                     endforeach;
-                    
+                    $likes = getUserLikes($username);
+                    $dislikes = getUserDislikes($username);
+                    $comments = getUserComments($username);
+                    $follows = getUserFollows($username);
                     $stories = getUserStories($username);
                    include('mypage-view.php');        // default action
                 }
