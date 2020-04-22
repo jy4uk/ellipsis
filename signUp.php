@@ -134,17 +134,24 @@ require('signUp-db.php');
                 
                 <!-- PHP CODE FOR ADDING NEW USERS TO THE DATABASE-->
                 <?php
-
-                $pass = trim($_POST['password']);
-                $user = trim($_POST['username']);
-                $name = trim($_POST['display_name']);
-                $email = trim($_POST['email_address']);
-                if(newUserSignUp($user, $pass, $name, $email)){
-                    echo "Successfully signed up!";
-                    }
-                    else{
-                    echo "hmmmm... it seems the sign up failed";
+                if($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) >= 5 && strlen($_POST['password']) >= 5){
+                    $user = trim($_POST['username']);
+                    $pass = trim($_POST['password']);
+                    $hash_pwd = password_hash($pass, PASSWORD_DEFAULT);
+                    $name = trim($_POST['display_name']);
+                    $email = trim($_POST['email_address']);
+                    if(newUserSignUp($user, $hash_pwd, $name, $email)){
+                        //echo $hash_pwd;
+                        echo "   Successfully signed up!";
+                        header('Location: mypage.php');
                         }
+                        else{
+                        echo "hmmmm... it seems the sign up failed";
+                            }
+                }
+                else{
+                    echo "Sign up failed. Please try again";
+                }
                 ?>
 
 

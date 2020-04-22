@@ -38,7 +38,7 @@ function checkPasswordToUser($username, $password)
     $results = $statement->fetch();
     $statement->closecursor();
     $hashpwd = $results[0];
-    if($password == $hashpwd) {
+    if(password_verify($password, $hashpwd)) {
         return true;
     }
     else{
