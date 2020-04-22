@@ -2,12 +2,12 @@
 
 function rejectUsername(){
     echo "<ul style='text-align: center; color: black;'>Username already exists/Username is not valid. </ul>";
-}
+} 
 
 function newUserSignUp($username, $hashed_pw, $name, $email) {
     global $db;
 
-    $query = "SELECT username FROM users where username = :username";
+    $query = "SELECT username FROM user where username = :username";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':username', $username);
 	$statement->execute();
@@ -15,9 +15,9 @@ function newUserSignUp($username, $hashed_pw, $name, $email) {
     $statement->closecursor();
     
     //if username doesn't already exist/is not already in use
-    if($results == '') {
+    if($results == NULL) {
         //insert into table
-        $query = "INSERT INTO users (username, password, display_name, email_address) VALUES (:username, :password, :display_name, :email_address)";
+        $query = "INSERT INTO user (username, password, display_name, email_address) VALUES (:username, :password, :display_name, :email_address)";
 	
         $statement = $db->prepare($query);
         $statement->bindValue(':username', $username);
