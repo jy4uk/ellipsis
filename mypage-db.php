@@ -1,5 +1,5 @@
 <?php
-
+require('../vendor/autoload.php');
 function getUser($user) {
     global $db;
     $query = "SELECT * FROM user WHERE username=:user";

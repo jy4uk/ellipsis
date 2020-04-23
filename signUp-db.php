@@ -1,5 +1,5 @@
 <?php 
-
+require('../vendor/autoload.php');
 function rejectUsername(){
     echo "<ul style='text-align: center; color: black;'>Username already exists/Username is not valid. </ul>";
 } 

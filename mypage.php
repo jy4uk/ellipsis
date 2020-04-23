@@ -1,5 +1,6 @@
 <?php
 require('connectdb.php');
+require('../vendor/autoload.php');
 // require('mypage-db.php');
 ?>
 

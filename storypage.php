@@ -1,4 +1,5 @@
 <?php
+require('../vendor/autoload.php');
 require('connectdb.php');
 require('story-db.php');
 
