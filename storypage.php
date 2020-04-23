@@ -80,19 +80,19 @@ $comments = getComments($_GET['storyID']);
 								<h2><?php echo 'By: <a href="userPage.php">' . $author_display . '</a>'?> </h2>
 								<br/>
 							</div>
-							<?php if(isset($_SESSION['user'])): ?>
+							<?php if(isset($_SESSION['user'])) { ?>
 								<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 								<input type="submit" value="Add to this story" name="action" class="btn" style="float: right;" />
 								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
-								<?php if(getCreator($_GET["storyID"]) == $_SESSION["user"]):?>
+								<?php if(getCreator($_GET["storyID"]) == $_SESSION["user"]) {?>
 									<br>
 									<br>
-                  <input type="submit" value="PUBLISH" name="action" class="btn" style="float: right;"/>
-                  <br>
-                  <br>
+									<input type="submit" value="PUBLISH" name="action" class="btn" style="float: right;"/>
+									<br>
+									<br>
 									<input type="submit" value="ARCHIVE" name="action" class="btn" style="float: right;"/>             
-								<?php endif; ?>
+								<?php }}; ?>
 								</form>
 
 						</div>
@@ -156,47 +156,6 @@ $comments = getComments($_GET['storyID']);
 							<?php endforeach; ?>
 						</div>
 					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<section>
-								<h2>Get in touch</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<input type="text" name="name" id="name" placeholder="Name" />
-										</div>
-										<div class="field half">
-											<input type="email" name="email" id="email" placeholder="Email" />
-										</div>
-										<div class="field">
-											<textarea name="message" id="message" placeholder="Message"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send" class="primary" /></li>
-									</ul>
-								</form>
-							</section>
-							<section>
-								<h2>Follow</h2>
-								<ul class="icons">
-									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
-							</section>
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
 
 			</div>
 
