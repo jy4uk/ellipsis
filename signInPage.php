@@ -1,7 +1,7 @@
 <?php
 require('connectdb.php');
 require('signInPage-db.php');
-require('../vendor/autoload.php');
+//require('../vendor/autoload.php');
 
 // $action = "list_tasks";        // default action
 ?>

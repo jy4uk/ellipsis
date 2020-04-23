@@ -1,5 +1,5 @@
 <?php
-require('../vendor/autoload.php');
+//require('../vendor/autoload.php');
 
 function getUser_by_username($username)
 {

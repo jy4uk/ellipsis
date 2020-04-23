@@ -1,5 +1,5 @@
 <?php
-require('../vendor/autoload.php');
+//require('../vendor/autoload.php');
 /******************************/
 // More info on connecting PHP and DB
 // http://www.cs.virginia.edu/~up3f/cs4640/supplement/connecting-PHP-DB.html
