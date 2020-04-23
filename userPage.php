@@ -3,11 +3,10 @@ require('connectdb.php');
 //require('../vendor/autoload.php');
 // require('mypage-db.php');
 ?>
-
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>My Page </title>
+		<title>Welcome </title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -36,6 +35,7 @@ require('connectdb.php');
 										<li><a href="#menu">Menu</a></li>
 									</ul>
 								</nav>
+
 						</div>
 					</header>
 
@@ -65,9 +65,6 @@ require('connectdb.php');
                     $comments = getUserComments($username);
                     $follows = getUserFollows($username);
                     $stories = getUserStories($username);
-                    $archives = getArchives($username);
-                    $published = getPublished($username);
-                    $activeStories = getActiveUserStories($username);
                    include('mypage-view.php');        // default action
                 }
                 else if ($_SERVER['REQUEST_METHOD'] == 'POST')

@@ -125,18 +125,69 @@ function getComments(int $storyID) {
     return $results;
 }
 
+
 function likeStory(int $storyID, $username) {
     global $db;
+    $query = "SELECT username FROM dislike WHERE storyID = :storyID AND username = :username";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $results = $statement->fetch();
+    $results1 = $results[0];
+    //echo "<h1>" . $results . "</h1>";
+    if($username == $results1){
+        $query = "DELETE FROM dislike WHERE username = :username AND storyID = :storyID";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':username', $username);
+        $statement->bindValue(':storyID', $storyID);
+        $statement->execute();
+    }
     $query = "INSERT INTO `like` (username, storyID) VALUES (:username, :storyID)";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $statement->closecursor();
+}
+
+function dislikeStory(int $storyID, $username){
+    global $db;
+    $query = "SELECT username FROM `like` WHERE storyID = :storyID AND username = :username";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $results = $statement->fetch();
+    $results1 = $results[0];
+    if($username == $results1){
+        $query = "DELETE FROM `like` WHERE username = :username AND storyID = :storyID";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':username', $username);
+        $statement->bindValue(':storyID', $storyID);
+        $statement->execute();
+    }
+    $query = "INSERT INTO `dislike` (username, storyID) VALUES (:username, :storyID)";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $statement->closecursor();
+    //return $results1;
+}
+
+function archiveStory(int $storyID, $username) {
+    global $db;
+    $query = "INSERT INTO `archive` (username, storyID) VALUES (:username, :storyID)";
     $statement = $db->prepare($query);
     $statement->bindValue('username', $username);
     $statement->bindValue(':storyID', $storyID);
     $statement->execute();
     $statement->closecursor();
 }
-function archiveStory(int $storyID, $username) {
+function publishStory(int $storyID, $username) {
     global $db;
-    $query = "INSERT INTO `archive` (username, storyID) VALUES (:username, :storyID)";
+    $query = "INSERT INTO `publish` (username, storyID) VALUES (:username, :storyID)";
     $statement = $db->prepare($query);
     $statement->bindValue('username', $username);
     $statement->bindValue(':storyID', $storyID);

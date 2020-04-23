@@ -19,6 +19,7 @@ $author_display = $story_details[0]['display_name'];
 $likes = getNumLikes($_GET['storyID']);
 $dislikes = getNumDislikes($_GET['storyID']);
 $comments = getComments($_GET['storyID']);
+
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -72,10 +73,11 @@ $comments = getComments($_GET['storyID']);
 
 				<!-- Main -->
 					<div id="main">
+
 						<div class="row">
 							<div class="column" style="width:75%; text-align:center">
 								<h1><?php echo $title ?></h1>
-								<h2><?php echo 'By: ' . $author_display ?> </h2>
+								<h2><?php echo 'By: <a href="userPage.php">' . $author_display . '</a>'?> </h2>
 								<br/>
 							</div>
 							<?php if(isset($_SESSION['user'])): ?>
@@ -86,11 +88,13 @@ $comments = getComments($_GET['storyID']);
 								<?php if(getCreator($_GET["storyID"]) == $_SESSION["user"]):?>
 									<br>
 									<br>
+                  <input type="submit" value="PUBLISH" name="action" class="btn" style="float: right;"/>
+                  <br>
+                  <br>
 									<input type="submit" value="ARCHIVE" name="action" class="btn" style="float: right;"/>             
 								<?php endif; ?>
 								</form>
-						
-							<?php endif; ?>
+
 						</div>
 						<div class="inner">
 							
@@ -112,18 +116,23 @@ $comments = getComments($_GET['storyID']);
 							<h3>Liked by <?php echo $likes; ?> people | Disliked by <?php echo $dislikes; ?> people</h3>
 							<div>
 							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-								<input type="submit" value="LIKE" name="action" class="btn" <?php echo $style2; ?>/>             
+								<input type="submit" value="LIKE" name="action1" class="btn" <?php echo $style2; ?>onclick="likeUnlike('action1')" />     
+								<input type="submit" value="DISLIKE" name="action" class="btn" <?php echo $style2; ?>/>      
 								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
-
 							</form>
+							
 							<?php
 								if ($_SERVER['REQUEST_METHOD'] == 'POST')
 								{
-								   if ($_POST['action'] == 'LIKE')
+								   if ($_POST['action1'] == 'LIKE')
 								   {
 									  likeStory($_POST['storyID'], $_POST['username']);
 									  header('Location: storypage.php?storyID=' . $_GET['storyID']);
+								   }
+								   if ($_POST['action'] == 'DISLIKE'){
+									dislikeStory($_POST['storyID'], $_POST['username']);
+									header('Location: storypage.php?storyID=' . $_GET['storyID']);
 								   }
 								   if ($_POST['action'] == 'ARCHIVE'){
 									   archiveStory($_POST['storyID'], $_POST['username']);
@@ -131,6 +140,10 @@ $comments = getComments($_GET['storyID']);
 								   if ($_POST['action'] == 'Add to this story') {
 									   header('Location: contribute-story.php?storyID=' . $_POST['storyID']);
 								   }
+								   if ($_POST['action'] == 'PUBLISH'){
+									  publishStory($_POST['storyID'], $_POST['username']);
+								  }
+
 								}
 							?>
 							</div>

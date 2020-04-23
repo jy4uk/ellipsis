@@ -63,6 +63,17 @@ function getUserStories($user) {
     $statement->closecursor();
     return $results;
 }
+function getActiveUserStories($user) {
+	global $db;
+    $query = "SELECT * FROM story NATURAL JOIN `create` NATURAL JOIN `user` where username = :user and storyID not in 
+	(SELECT * from publish)  and storyID not in (select * from archive)";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':user', $user);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results;
+}
 function getUserLikes($user){
 	global $db;
     $query = "SELECT * FROM `like` NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
@@ -107,12 +118,31 @@ function getUserFollows($user){
     $statement->closecursor();
     return $results;
 }
-
-function getCreator($storyID){
+function getArchives($user) {
+    global $db;
+    $query = "SELECT * FROM `archive`NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
+    $statement = $db->prepare($query);
+	$statement->bindValue(':user', $user);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results;
+}
+function getPublished($user) {
+    global $db;
+    $query = "SELECT * FROM `publish`NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':user', $user);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results;
+}
+function getCreator(int $storyID){
 	global $db;
-	$query = "SELECT username FROM `create` WHERE storyID = :storyid";
+	$query = "SELECT username FROM `create` WHERE storyID = :storyID";
 	$statement = $db->prepare($query);
-	$statement->bindValue(':storyid', $storyID);
+	$statement->bindValue(':storyID', $storyID);
 	$statement->execute();
     $results = $statement->fetchAll();
     $statement->closecursor();

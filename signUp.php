@@ -82,10 +82,10 @@ require('signUp-db.php');
                                 </div>
                                 <div class="row" style="width=33.33%;">
                                     <div class="column" style="width:50%; text-align: right;">
-                                        <div style="color: black;">First Name:</div>
+                                        <div style="color: black;">Full Name:</div>
                                     </div>
                                     <div class="column" style="width:50%; text-align: left;">
-                                        <div style="color: black;"><input type="text" id="display_name" name="display_name" placeholder="First Name" required></div>
+                                        <div style="color: black;"><input type="text" id="display_name" name="display_name" placeholder="Full Name" required></div>
                                     </div>
                                 </div>
                                 <div class="row" style="width=33.33%;">
@@ -140,8 +140,8 @@ require('signUp-db.php');
                     $email = trim($_POST['email_address']);
                     if(newUserSignUp($user, $hash_pwd, $name, $email)){
                         //echo $hash_pwd;
-                        echo "   Successfully signed up!";
-                        header('Location: mypage.php');
+                        echo "  Successfully signed up!";
+                        //header('Location: mypage.php');
                         }
                         else{
                         echo "hmmmm... it seems the sign up failed";
