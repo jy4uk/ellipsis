@@ -75,9 +75,9 @@ $comments = getComments($_GET['storyID']);
 					<div id="main">
 						<div class="inner">
 							<h1><?php echo $title ?></h1>
-							<h2><?php echo 'By: ' . $author_display ?> </h2>
+							<h2><?php echo "By: " ."<a href='userPage.php'>" . $author_display . "</a>"?> </h2>
 							<br/>
-							<?php if(getCreator($_GET["storyID"]) == $_SESSION["user"]): ?>
+							<?php if(isset($_SESSION['user']) && getCreator($_GET["storyID"]) == $_SESSION["user"]): ?>
 							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 								<input type="submit" value="ARCHIVE" name="action" class="btn" />             
 								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
@@ -110,19 +110,26 @@ $comments = getComments($_GET['storyID']);
 							<h3>Liked by <?php echo $likes; ?> people | Disliked by <?php echo $dislikes; ?> people</h3>
 							<div>
 							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-								<input type="submit" value="LIKE" name="action" class="btn" />             
+								<?php
+								
+								?>
+								<input type="submit" value="LIKE" name="action1" class="btn" onclick="likeUnlike('action1')" />     
+								<input type="submit" value="DISLIKE" name="action" class="btn" />      
 								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
-
 							</form>
 							
 							<?php
 								if ($_SERVER['REQUEST_METHOD'] == 'POST')
 								{
-								   if ($_POST['action'] == 'LIKE')
+								   if ($_POST['action1'] == 'LIKE')
 								   {
 									  likeStory($_POST['storyID'], $_POST['username']);
 									  header('Location: storypage.php?storyID=' . $_GET['storyID']);
+								   }
+								   if ($_POST['action'] == 'DISLIKE'){
+									dislikeStory($_POST['storyID'], $_POST['username']);
+									header('Location: storypage.php?storyID=' . $_GET['storyID']);
 								   }
 								   if ($_POST['action'] == 'ARCHIVE'){
 									   archiveStory($_POST['storyID'], $_POST['username']);
