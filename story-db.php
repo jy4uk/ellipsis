@@ -68,6 +68,30 @@ function createNewStory($title, $first_piece , $username) {
     
 }
 
+function makeContribution($contribution, $username, $storyID) {
+    global $db;
+
+    $contributes_query = "INSERT INTO contributes_to (username, storyID, story_text, piece_key) VALUES (:username, :storyID, :story_text, NULL)";
+
+    $contributes_statement = $db->prepare($contributes_query);
+    $contributes_statement->bindValue(':username', $username);
+    $contributes_statement->bindValue(':storyID', $storyID);
+    $contributes_statement->bindValue(':story_text', $contribution);
+    $contributes_statement->execute();
+    $contributes_statement->closecursor();
+
+    $id_query = "SELECT LAST_INSERT_ID() FROM contributes_to";
+    $id_statement = $db->prepare($id_query);
+    $id_statement->execute();
+    $pieceID = $id_statement->fetchAll()[0]['LAST_INSERT_ID()'];
+    if($pieceID > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function getNumLikes(int $storyID) {
     global $db;
     $query = "SELECT COUNT(username) FROM `like` WHERE storyID=:storyID";

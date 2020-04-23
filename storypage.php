@@ -73,24 +73,30 @@ $comments = getComments($_GET['storyID']);
 
 				<!-- Main -->
 					<div id="main">
+
+						<div class="row">
+							<div class="column" style="width:75%; text-align:center">
+								<h1><?php echo $title ?></h1>
+								<h2><?php echo 'By: <a href="userPage.php">' . $author_display . '</a>'?> </h2>
+								<br/>
+							</div>
+							<?php if(isset($_SESSION['user'])): ?>
+								<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+								<input type="submit" value="Add to this story" name="action" class="btn" style="float: right;" />
+								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
+								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
+								<?php if(getCreator($_GET["storyID"]) == $_SESSION["user"]):?>
+									<br>
+									<br>
+                  <input type="submit" value="PUBLISH" name="action" class="btn" style="float: right;"/>
+                  <br>
+                  <br>
+									<input type="submit" value="ARCHIVE" name="action" class="btn" style="float: right;"/>             
+								<?php endif; ?>
+								</form>
+
+						</div>
 						<div class="inner">
-							<h1><?php echo $title ?></h1>
-							<h2><?php echo "By: " ."<a href='userPage.php'>" . $author_display . "</a>"?> </h2>
-							<br/>
-							<?php if(isset($_SESSION['user']) && getCreator($_GET["storyID"]) == $_SESSION["user"]): ?>
-							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-								<input type="submit" value="ARCHIVE" name="action" class="btn" />             
-								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
-								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
-
-							</form>
-							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-								<input type="submit" value="PUBLISH" name="action" class="btn" />             
-								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
-								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
-
-							</form>
-							<?php endif; ?>
 							
 							<strong>Story Text:</strong>
 							<br></br>
@@ -110,11 +116,8 @@ $comments = getComments($_GET['storyID']);
 							<h3>Liked by <?php echo $likes; ?> people | Disliked by <?php echo $dislikes; ?> people</h3>
 							<div>
 							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-								<?php
-								
-								?>
-								<input type="submit" value="LIKE" name="action1" class="btn" onclick="likeUnlike('action1')" />     
-								<input type="submit" value="DISLIKE" name="action" class="btn" />      
+								<input type="submit" value="LIKE" name="action1" class="btn" <?php echo $style2; ?>onclick="likeUnlike('action1')" />     
+								<input type="submit" value="DISLIKE" name="action" class="btn" <?php echo $style2; ?>/>      
 								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
 							</form>
@@ -134,9 +137,13 @@ $comments = getComments($_GET['storyID']);
 								   if ($_POST['action'] == 'ARCHIVE'){
 									   archiveStory($_POST['storyID'], $_POST['username']);
 								   }
+								   if ($_POST['action'] == 'Add to this story') {
+									   header('Location: contribute-story.php?storyID=' . $_POST['storyID']);
+								   }
 								   if ($_POST['action'] == 'PUBLISH'){
-									publishStory($_POST['storyID'], $_POST['username']);
-								}
+									  publishStory($_POST['storyID'], $_POST['username']);
+								  }
+
 								}
 							?>
 							</div>
