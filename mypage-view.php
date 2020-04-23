@@ -40,8 +40,11 @@
     <?php endforeach; ?>
     <br/>
     <h2 style="color:black">Stories You Created</h2>
-        <?php foreach($stories as $s): ?>
-            <li><a href="storypage.php"><?php echo $s['title']?></li>
+    <?php foreach($stories as $s): ?>
+            <li>
+            <?php echo '<a href="storypage.php?storyID=' . $s['storyID'] . '&title=' . $s['title'] . '&author_display=' . $s['display_name'] . '&author_user=' . $s['username'] . '">';
+            echo $s['title'];
+            ?></li>
         <?php endforeach; ?>
         <h2 style="color:black">Stories You Like</h2>
         <?php foreach($likes as $l): ?>
