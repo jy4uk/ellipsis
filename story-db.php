@@ -67,4 +67,47 @@ function createNewStory($title, $first_piece , $username) {
     
 }
 
+function getNumLikes(int $storyID) {
+    global $db;
+    $query = "SELECT COUNT(username) FROM `like` WHERE storyID=:storyID";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $results = $statement->fetch();
+    $statement->closecursor();
+    return $results[0];
+}
+
+function getNumDislikes(int $storyID) {
+    global $db;
+    $query = "SELECT COUNT(username) FROM `dislike` WHERE storyID=:storyID";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $results = $statement->fetch();
+    $statement->closecursor();
+    return $results[0];
+}
+
+function getComments(int $storyID) {
+    global $db;
+    $query = "SELECT * FROM `comment` WHERE storyID=:storyID";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results;
+}
+
+function likeStory(int $storyID, $username) {
+    global $db;
+    $query = "INSERT INTO `like` (username, storyID) VALUES (:username, :storyID)";
+    $statement = $db->prepare($query);
+    $statement->bindValue('username', $username);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $statement->closecursor();
+}
+
 ?>

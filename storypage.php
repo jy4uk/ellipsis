@@ -15,6 +15,9 @@ if ( isset( $_SESSION['user']) ) {
 $story_details = getStoryDetails($_GET['storyID']);
 $title = $story_details[0]['title'];
 $author_display = $story_details[0]['display_name'];
+$likes = getNumLikes($_GET['storyID']);
+$dislikes = getNumDislikes($_GET['storyID']);
+$comments = getComments($_GET['storyID']);
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -71,6 +74,7 @@ $author_display = $story_details[0]['display_name'];
 						<div class="inner">
 							<h1><?php echo $title ?></h1>
 							<h2><?php echo 'By: ' . $author_display ?> </h2>
+							<br/>
 							<strong>Story Text:</strong>
 							<br></br>
 							<?php
@@ -82,6 +86,36 @@ $author_display = $story_details[0]['display_name'];
 							endforeach;
 							echo '<p>' . $whole_story . '</p>';
 							?>
+						</div>
+						<br/>
+						
+						<div class="inner">
+							<h3>Liked by <?php echo $likes; ?> people | Disliked by <?php echo $dislikes; ?> people</h3>
+							<div>
+							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+								<input type="submit" value="LIKE" name="action" class="btn" />             
+								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
+								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
+
+							</form>
+							<?php
+								if ($_SERVER['REQUEST_METHOD'] == 'POST')
+								{
+								   if ($_POST['action'] == 'LIKE')
+								   {
+									  likeStory($_POST['storyID'], $_POST['username']);
+									  header('Location: storypage.php?storyID=' . $_GET['storyID']);
+								   }
+								}
+							?>
+							</div>
+						</div>
+						<div class="inner">
+							<h3>Comments:</h3>
+							<!-- insert comment form -->
+							<?php foreach($comments as $comment): ?>
+								<li style="font-style: bold;"><?php echo $comment['username'] . ": " . $comment['comment_text']; ?></li>
+							<?php endforeach; ?>
 						</div>
 					</div>
 
