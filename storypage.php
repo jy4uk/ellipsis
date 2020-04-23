@@ -1,5 +1,5 @@
 <?php
-require('../vendor/autoload.php');
+//require('../vendor/autoload.php');
 require('connectdb.php');
 require('story-db.php');
 
@@ -76,6 +76,16 @@ $comments = getComments($_GET['storyID']);
 							<h1><?php echo $title ?></h1>
 							<h2><?php echo 'By: ' . $author_display ?> </h2>
 							<br/>
+							<?php if(getCreator($_GET["storyID"]) == $_SESSION["user"]): ?>
+							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+								<input type="submit" value="ARCHIVE" name="action" class="btn" />             
+								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
+								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
+
+							</form>
+						
+							<?php endif; ?>
+							
 							<strong>Story Text:</strong>
 							<br></br>
 							<?php
@@ -106,6 +116,9 @@ $comments = getComments($_GET['storyID']);
 								   {
 									  likeStory($_POST['storyID'], $_POST['username']);
 									  header('Location: storypage.php?storyID=' . $_GET['storyID']);
+								   }
+								   if ($_POST['action'] == 'ARCHIVE'){
+									   archiveStory($_POST['storyID'], $_POST['username']);
 								   }
 								}
 							?>

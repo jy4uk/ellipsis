@@ -2,7 +2,7 @@
 require('connectdb.php');
 require('home-db.php');
 require('story-db.php');
-require('../vendor/autoload.php');
+//require('../vendor/autoload.php');
 //require('signOut.php');
 
 session_start();

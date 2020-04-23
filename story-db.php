@@ -1,5 +1,5 @@
 <?php
-require('../vendor/autoload.php');
+//require('../vendor/autoload.php');
 
 function getStoryPieces(int $storyID) {
     global $db;
@@ -110,5 +110,24 @@ function likeStory(int $storyID, $username) {
     $statement->execute();
     $statement->closecursor();
 }
+function archiveStory(int $storyID, $username) {
+    global $db;
+    $query = "INSERT INTO `archive` (username, storyID) VALUES (:username, :storyID)";
+    $statement = $db->prepare($query);
+    $statement->bindValue('username', $username);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $statement->closecursor();
+}
 
+function getCreator($storyID){
+	global $db;
+	$query = "SELECT username FROM `create` WHERE storyID = :storyid";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':storyid', $storyID);
+	$statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closecursor();
+    return $results[0]['username'];
+}
 ?>

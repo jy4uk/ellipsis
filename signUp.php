@@ -1,6 +1,6 @@
 <?php
 require('connectdb.php');
-require('../vendor/autoload.php');
+//require('../vendor/autoload.php');
 //require('signInPage-db.php');
 require('signUp-db.php');
 ?>
