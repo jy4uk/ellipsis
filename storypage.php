@@ -19,6 +19,7 @@ $author_display = $story_details[0]['display_name'];
 $likes = getNumLikes($_GET['storyID']);
 $dislikes = getNumDislikes($_GET['storyID']);
 $comments = getComments($_GET['storyID']);
+
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -83,7 +84,12 @@ $comments = getComments($_GET['storyID']);
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
 
 							</form>
-						
+							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+								<input type="submit" value="PUBLISH" name="action" class="btn" />             
+								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
+								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
+
+							</form>
 							<?php endif; ?>
 							
 							<strong>Story Text:</strong>
@@ -109,6 +115,7 @@ $comments = getComments($_GET['storyID']);
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
 
 							</form>
+							
 							<?php
 								if ($_SERVER['REQUEST_METHOD'] == 'POST')
 								{
@@ -120,6 +127,9 @@ $comments = getComments($_GET['storyID']);
 								   if ($_POST['action'] == 'ARCHIVE'){
 									   archiveStory($_POST['storyID'], $_POST['username']);
 								   }
+								   if ($_POST['action'] == 'PUBLISH'){
+									publishStory($_POST['storyID'], $_POST['username']);
+								}
 								}
 							?>
 							</div>

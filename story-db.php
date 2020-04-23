@@ -101,6 +101,7 @@ function getComments(int $storyID) {
     return $results;
 }
 
+
 function likeStory(int $storyID, $username) {
     global $db;
     $query = "INSERT INTO `like` (username, storyID) VALUES (:username, :storyID)";
@@ -113,6 +114,15 @@ function likeStory(int $storyID, $username) {
 function archiveStory(int $storyID, $username) {
     global $db;
     $query = "INSERT INTO `archive` (username, storyID) VALUES (:username, :storyID)";
+    $statement = $db->prepare($query);
+    $statement->bindValue('username', $username);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $statement->closecursor();
+}
+function publishStory(int $storyID, $username) {
+    global $db;
+    $query = "INSERT INTO `publish` (username, storyID) VALUES (:username, :storyID)";
     $statement = $db->prepare($query);
     $statement->bindValue('username', $username);
     $statement->bindValue(':storyID', $storyID);

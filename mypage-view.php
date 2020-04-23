@@ -39,8 +39,8 @@
     
     <?php endforeach; ?>
     <br/>
-    <h2 style="color:black">Stories You Created</h2>
-    <?php foreach($stories as $s): ?>
+    <h2 style="color:black">Your active Stories</h2>
+    <?php foreach($activeStories as $s): ?>
             <li>
             <?php echo '<a href="storypage.php?storyID=' . $s['storyID'] . '&title=' . $s['title'] . '&author_display=' . $s['display_name'] . '&author_user=' . $s['username'] . '">';
             echo $s['title'];
@@ -79,6 +79,24 @@
     <br/>
     <h2 style="color:black">Stories You're Following</h2>
         <?php foreach($follows as $f): ?>
+            <li>
+            <?php echo '<a href="storypage.php?storyID=' . $f['storyID'] . '&title=' . $f['title'] . '&author_display=' . $f['display_name'] . '&author_user=' . $f['username'] . '">' ;
+            echo $f['title'];
+            echo " by " . getCreator($f['storyID']);
+            ?>
+            </li>
+    <?php endforeach; ?>
+    <h2 style="color:black">Stories You Published</h2>
+        <?php foreach($published as $f): ?>
+            <li>
+            <?php echo '<a href="storypage.php?storyID=' . $f['storyID'] . '&title=' . $f['title'] . '&author_display=' . $f['display_name'] . '&author_user=' . $f['username'] . '">' ;
+            echo $f['title'];
+            echo " by " . getCreator($f['storyID']);
+            ?>
+            </li>
+    <?php endforeach; ?>
+    <h2 style="color:black">Stories You Archived</h2>
+        <?php foreach($archives as $f): ?>
             <li>
             <?php echo '<a href="storypage.php?storyID=' . $f['storyID'] . '&title=' . $f['title'] . '&author_display=' . $f['display_name'] . '&author_user=' . $f['username'] . '">' ;
             echo $f['title'];
