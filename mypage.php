@@ -66,6 +66,9 @@ require('connectdb.php');
                     $comments = getUserComments($username);
                     $follows = getUserFollows($username);
                     $stories = getUserStories($username);
+                    $archives = getArchives($username);
+                    $published = getPublished($username);
+                    $activeStories = getActiveUserStories($username);
                    include('mypage-view.php');        // default action
                 }
                 else if ($_SERVER['REQUEST_METHOD'] == 'POST')
