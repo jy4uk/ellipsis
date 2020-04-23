@@ -1,0 +1,7 @@
+# Use the PHP 7.3 runtime by replacing "php72" below with "php73"
+runtime: php73
+
+# Defaults to "serve index.php" 
+entrypoint: serve home.php
+
+# If your main page is index.php, comment the above entrypoint setting 
