@@ -15,7 +15,7 @@ if ( isset( $_SESSION['user']) ) {
      $style2 = "style='display:none;'";
     //  header('Location: signInPage.php');
 }
-
+ 
 // $action = "list_tasks";        // default action
 ?>
 <!DOCTYPE HTML>
@@ -79,7 +79,7 @@ if ( isset( $_SESSION['user']) ) {
 							<header>
 								<h1>Welcome to Ellipsis...<br />
 								a collaborative storywriting platform</h1>
-								<p>Browse the genres below to find stories...<br />
+								<p>Browse the stories below and get started...<br />
 								 Head to your profile to start a story of your own! </p>
 							</header>
 							<section class="tiles">
