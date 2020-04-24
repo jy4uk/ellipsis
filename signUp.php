@@ -23,7 +23,7 @@ require('signUp-db.php');
 						<div class="inner">
 
 							<!-- Logo -->
-								<a href="home.php" class="logo">
+								<a href="index.php" class="logo">
 									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
 								</a>
 
@@ -41,7 +41,7 @@ require('signUp-db.php');
                 <nav id="menu"> 
 						<h2>Menu</h2>
 						<ul>
-                            <li><a href="home.php">Home</a></li>
+                            <li><a href="index.php">Home</a></li>
 							<li><a href="signInPage.php">Sign In</a></li>
                             
 						</ul>

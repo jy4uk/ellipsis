@@ -23,7 +23,7 @@ require('story-db.php');
 						<div class="inner">
 
 							<!-- Logo -->
-								<a href="home.php" class="logo">
+								<a href="index.php" class="logo">
 									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
 								</a>
 
@@ -41,7 +41,7 @@ require('story-db.php');
                 <nav id="menu">
 						<h2>Hello, <?php echo $_SESSION['user']; ?>!</h2>
 						<ul>
-                            <li><a href="home.php">Home</a></li>
+                            <li><a href="index.php">Home</a></li>
 							<li><a href="mypage.php">My Page</a></li>
                             <li><a href="signOut.php?logout=1">Log Out</a></li>
 						</ul>

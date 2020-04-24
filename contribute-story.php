@@ -27,7 +27,7 @@ $author_display = $story_details[0]['display_name'];
 						<div class="inner">
 
 							<!-- Logo -->
-								<a href="home.php" class="logo">
+								<a href="index.php" class="logo">
 									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
 								</a>
                                 <a href="create-story.php" class="logo" style="float: right;"><span class="title">Create Story</span></a>
@@ -46,7 +46,7 @@ $author_display = $story_details[0]['display_name'];
                 <nav id="menu"> 
                         <h2>Hello, <?php echo $_SESSION['user']; ?>!</h2>
 						<ul>
-                            <li><a href="home.php">Home</a></li>
+                            <li><a href="index.php">Home</a></li>
 							<li><a href="mypage.php">My Page</a></li>
                             <li><a href="signOut.php?logout=1">Log Out</a></li>
 						</ul>

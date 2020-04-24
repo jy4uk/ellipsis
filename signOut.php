@@ -6,7 +6,7 @@ if(count($_SESSION) > 0) {
     unset($_SESSION[$key]);
   }
   session_destroy();
-  header("Location: home.php");
+  header("Location: index.php");
 }
 
 
