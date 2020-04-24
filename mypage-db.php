@@ -130,7 +130,7 @@ function getArchives($user) {
 }
 function getPublished($user) {
     global $db;
-    $query = "SELECT * FROM `publish`NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
+    $query = "SELECT * FROM `publish` NATURAL JOIN story NATURAL JOIN `user` WHERE username = :user";
     $statement = $db->prepare($query);
     $statement->bindValue(':user', $user);
     $statement->execute();

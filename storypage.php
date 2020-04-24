@@ -16,6 +16,7 @@ if ( isset( $_SESSION['user']) ) {
 $story_details = getStoryDetails($_GET['storyID']);
 $title = $story_details[0]['title'];
 $author_display = $story_details[0]['display_name'];
+$author_user = $story_details[0]['username'];
 $likes = getNumLikes($_GET['storyID']);
 $dislikes = getNumDislikes($_GET['storyID']);
 $comments = getComments($_GET['storyID']);
@@ -77,7 +78,8 @@ $comments = getComments($_GET['storyID']);
 						<div class="row">
 							<div class="column" style="width:75%; text-align:center">
 								<h1><?php echo $title ?></h1>
-								<h2><?php echo 'By: <a href="userPage.php">' . $author_display . '</a>'?> </h2>
+								<!-- <h2><?php echo 'By: <a href="userPage.php">' . $author_display . '</a>'?> </h2> -->
+								<?php echo "<h2>By: <a href='userPage.php?username=" . $author_user . "'>" . $author_display . "</a></h2>"; ?>
 								<br/>
 							</div>
 							<?php if(isset($_SESSION['user'])) { ?>
