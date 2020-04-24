@@ -60,8 +60,7 @@
             <?php foreach($published as $f): ?>
                 <li>
                 <?php echo '<a href="storypage.php?storyID=' . $f['storyID'] . '&title=' . $f['title'] . '&author_display=' . $f['display_name'] . '&author_user=' . $f['username'] . '">' ;
-                echo $f['title'];
-                echo " by " . getCreator($f['storyID']);
+                echo $f['title'] . '</a>';
                 ?>
                 </li>
             <?php endforeach; ?>
@@ -70,8 +69,7 @@
                 <?php foreach($archives as $f): ?>
                 <li>
                 <?php echo '<a href="storypage.php?storyID=' . $f['storyID'] . '&title=' . $f['title'] . '&author_display=' . $f['display_name'] . '&author_user=' . $f['username'] . '">' ;
-                echo $f['title'];
-                echo " by " . getCreator($f['storyID']);
+                echo $f['title'] . '</a>';
                 ?>
                 </li>
             <?php endforeach; ?>
@@ -81,7 +79,7 @@
             <?php foreach($likes as $l): ?>
                 <li>
                 <?php echo '<a href="storypage.php?storyID=' . $l['storyID'] . '&title=' . $l['title'] . '&author_display=' . $l['display_name'] . '&author_user=' . $l['username'] . '">' ;
-                echo $l['title'];
+                echo $l['title'] . '</a>';
                 echo " by " . getCreator($l['storyID']);
                 ?>
                 </li>
@@ -91,7 +89,7 @@
                 <?php foreach($follows as $f): ?>
                     <li>
                     <?php echo '<a href="storypage.php?storyID=' . $f['storyID'] . '&title=' . $f['title'] . '&author_display=' . $f['display_name'] . '&author_user=' . $f['username'] . '">' ;
-                    echo $f['title'];
+                    echo $f['title'] . '</a>';
                     echo " by " . getCreator($f['storyID']);
                     ?>
                     </li>
@@ -101,7 +99,7 @@
             <?php foreach($comments as $c): ?>
                 <li>
                 <?php echo '<a href="storypage.php?storyID=' . $c['storyID'] . '&title=' . $c['title'] . '&author_display=' . $c['display_name'] . '&author_user=' . $c['username'] . '">' ;
-                echo $c['title'];
+                echo $c['title'] . '</a>';
                 echo " by " . getCreator($c['storyID']);
                 echo "  |  " . $c['comment_text'];
                 ?>
