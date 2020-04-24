@@ -27,18 +27,19 @@
     <br/>
     <div class="inner" style="padding: 0 0 0 4em">  
     <br/>
-    <h2 style="color:black"><?php echo $displayname ?>'s's Active Stories</h2>
+    <h2 style="color:black"><?php echo $displayname ?>'s Active Stories</h2>
     <?php foreach($stories as $s): ?>
             <li>
             <?php echo '<a href="storypage.php?storyID=' . $s['storyID'] . '&title=' . $s['title'] . '&author_display=' . $s['display_name'] . '&author_user=' . $s['username'] . '">';
-            echo $s['title'];
+            echo $s['title'] . '</a>';
             ?></li>
         <?php endforeach; ?>
-        <h2 style="color:black">Stories <?php echo $displayname ?>'s Likes</h2>
+        <br/>
+        <h2 style="color:black"><?php echo $displayname ?>'s Likes</h2>
         <?php foreach($likes as $l): ?>
             <li>
             <?php echo '<a href="storypage.php?storyID=' . $l['storyID'] . '&title=' . $l['title'] . '&author_display=' . $l['display_name'] . '&author_user=' . $l['username'] . '">' ;
-            echo $l['title'];
+            echo $l['title'] . '</a>';
             echo " by " . getCreator($l['storyID']);
             ?>
             </li>
@@ -65,15 +66,6 @@
             </li>
     <?php endforeach; ?>
     <br/>
-    <h2 style="color:black">Stories <?php echo $displayname ?> is Following</h2>
-        <?php foreach($follows as $f): ?>
-            <li>
-            <?php echo '<a href="storypage.php?storyID=' . $f['storyID'] . '&title=' . $f['title'] . '&author_display=' . $f['display_name'] . '&author_user=' . $f['username'] . '">' ;
-            echo $f['title'];
-            echo " by " . getCreator($f['storyID']);
-            ?>
-            </li>
-    <?php endforeach; ?>
     <h2 style="color:black"><?php echo $displayname ?>'s Published Stories</h2>
         <?php foreach($published as $f): ?>
             <li>
@@ -83,6 +75,7 @@
             ?>
             </li>
     <?php endforeach; ?>
+    <br/>
   </div>
   
 </html>

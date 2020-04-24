@@ -66,7 +66,7 @@ require('connectdb.php');
                     $dislikes = getUserDislikes($username);
                     $comments = getUserComments($username);
                     $follows = getUserFollows($username);
-                    $stories = getUserStories($username);
+                    $stories = getActiveUserStories($username);
                     $published = getPublished($username);
                    include('userpage-view.php');        // default action
                 }
