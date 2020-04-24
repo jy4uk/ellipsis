@@ -45,7 +45,7 @@ $comments = getComments($_GET['storyID']);
 						<div class="inner">
 
 							<!-- Logo -->
-								<a href="home.php" class="logo">
+								<a href="index.php" class="logo">
 									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Ellipsis</span>
 								</a>
 
@@ -65,7 +65,7 @@ $comments = getComments($_GET['storyID']);
 					<nav id="menu">
 						<h2>Menu</h2>
 						<ul>
-                            <li><a href="home.php">Home</a></li>
+                            <li><a href="index.php">Home</a></li>
 							<li><a href="signInPage.php" <?php echo $style1;?>>Sign In</a></li>
 							<li><a href="mypage.php"<?php echo $style2; ?>>My Page</a></li>
 							<li><a href="signOut.php?logout=1"<?php echo $style2; ?>>Log Out</a></li>
