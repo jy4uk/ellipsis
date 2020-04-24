@@ -65,8 +65,8 @@ function getUserStories($user) {
 }
 function getActiveUserStories($user) {
 	global $db;
-    $query = "SELECT * FROM story NATURAL JOIN `create` NATURAL JOIN `user` where username = :user and storyID not in 
-	(SELECT * from publish)  and storyID not in (select * from archive)";
+    $query = "SELECT * FROM story NATURAL JOIN `create` NATURAL JOIN `user` WHERE username = :user AND storyID NOT IN
+	(SELECT storyID FROM publish UNION SELECT storyID FROM archive)";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':user', $user);
     $statement->execute();

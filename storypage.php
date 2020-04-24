@@ -77,23 +77,38 @@ $comments = getComments($_GET['storyID']);
 
 						<div class="row">
 							<div class="column" style="width:75%; text-align:center">
-								<h1><?php echo $title ?></h1>
+								<h1><?php echo '<i>' . $title . '</i>' ?></h1>
 								<!-- <h2><?php echo 'By: <a href="userPage.php">' . $author_display . '</a>'?> </h2> -->
-								<?php echo "<h2>By: <a href='userPage.php?username=" . $author_user . "'>" . $author_display . "</a></h2>"; ?>
+								<?php echo "<p>By: <strong><a href='userPage.php?username=" . $author_user . "'>" . $author_display . "</a></strong></p>"; ?>
 								<br/>
 							</div>
 							<?php if(isset($_SESSION['user'])) { ?>
 								<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-								<input type="submit" value="Add to this story" name="action" class="btn" style="float: right;" />
 								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
+								<?php if(!isPublished($_GET['storyID']) && !isArchived($_GET['storyID'])) { ?>
+									<input type="submit" value="Add to this story" name="action" class="btn" style="float: right;" />
+								<?php }
+								else { ?>
+									<p style="float: right;"><strong>Further contributions halted by creator</strong></p>
+								<?php } ?>
 								<?php if(getCreator($_GET["storyID"]) == $_SESSION["user"]) {?>
 									<br>
 									<br>
-									<input type="submit" value="PUBLISH" name="action" class="btn" style="float: right;"/>
+									<?php if(isPublished($_GET['storyID'])) { ?>
+										<input type="submit" value="UNPUBLISH" name="action" class="btn" style="float: right;"/>
+									<?php }
+									else if (!isArchived($_GET['storyID'])) { ?>
+										<input type="submit" value="PUBLISH" name="action" class="btn" style="float: right;"/>
+									<?php } ?>
 									<br>
 									<br>
-									<input type="submit" value="ARCHIVE" name="action" class="btn" style="float: right;"/>             
+									<?php if(isArchived($_GET['storyID'])) { ?>
+										<input type="submit" value="UNARCHIVE" name="action" class="btn" style="float: right;"/>
+									<?php }
+									else { ?>
+										<input type="submit" value="ARCHIVE" name="action" class="btn" style="float: right;"/>
+									<?php } ?>
 								<?php }}; ?>
 								</form>
 
@@ -118,7 +133,7 @@ $comments = getComments($_GET['storyID']);
 							<h3>Liked by <?php echo $likes; ?> people | Disliked by <?php echo $dislikes; ?> people</h3>
 							<div>
 							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-								<input type="submit" value="LIKE" name="action1" class="btn" <?php echo $style2; ?>onclick="likeUnlike('action1')" />     
+								<input type="submit" value="LIKE" name="action" class="btn" <?php echo $style2; ?>/>     
 								<input type="submit" value="DISLIKE" name="action" class="btn" <?php echo $style2; ?>/>      
 								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
@@ -127,24 +142,34 @@ $comments = getComments($_GET['storyID']);
 							<?php
 								if ($_SERVER['REQUEST_METHOD'] == 'POST')
 								{
-								   if ($_POST['action1'] == 'LIKE')
-								   {
-									  likeStory($_POST['storyID'], $_POST['username']);
-									  header('Location: storypage.php?storyID=' . $_GET['storyID']);
-								   }
-								   if ($_POST['action'] == 'DISLIKE'){
-									dislikeStory($_POST['storyID'], $_POST['username']);
-									header('Location: storypage.php?storyID=' . $_GET['storyID']);
-								   }
-								   if ($_POST['action'] == 'ARCHIVE'){
-									   archiveStory($_POST['storyID'], $_POST['username']);
-								   }
-								   if ($_POST['action'] == 'Add to this story') {
-									   header('Location: contribute-story.php?storyID=' . $_POST['storyID']);
-								   }
-								   if ($_POST['action'] == 'PUBLISH'){
-									  publishStory($_POST['storyID'], $_POST['username']);
-								  }
+									if ($_POST['action'] == 'LIKE')
+									{
+										likeStory($_POST['storyID'], $_POST['username']);
+										header('Location: storypage.php?storyID=' . $_GET['storyID']);
+									}
+									if ($_POST['action'] == 'DISLIKE'){
+										dislikeStory($_POST['storyID'], $_POST['username']);
+										header('Location: storypage.php?storyID=' . $_GET['storyID']);
+									}
+									if ($_POST['action'] == 'ARCHIVE'){
+										archiveStory($_POST['storyID'], $_POST['username']);
+										header('Location: storypage.php?storyID=' . $_GET['storyID']);
+									}
+									if ($_POST['action'] == 'UNARCHIVE') {
+									   unarchiveStory($_POST['storyID']);
+									   header('Location: storypage.php?storyID=' . $_GET['storyID']);
+									}
+									if ($_POST['action'] == 'Add to this story') {
+										header('Location: contribute-story.php?storyID=' . $_POST['storyID']);
+									}
+									if ($_POST['action'] == 'PUBLISH'){
+										publishStory($_POST['storyID'], $_POST['username']);
+										header('Location: storypage.php?storyID=' . $_GET['storyID']);
+									}
+									if ($_POST['action'] == 'UNPUBLISH') {
+										unpublishStory($_POST['storyID']);
+										header('Location: storypage.php?storyID=' . $_GET['storyID']);
+									}
 
 								}
 							?>

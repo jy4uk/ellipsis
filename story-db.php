@@ -27,6 +27,32 @@ function getStoryDetails(int $storyID) {
     return $results;
 }
 
+function isPublished(int $storyID) {
+    global $db;
+    $query = "SELECT * FROM publish WHERE storyID = $storyID";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    if(count($statement->fetchAll()) == 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+function isArchived(int $storyID) {
+    global $db;
+    $query = "SELECT * FROM archive WHERE storyID = $storyID";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    if(count($statement->fetchAll()) == 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
 function createNewStory($title, $first_piece , $username) {
     global $db;
 
@@ -185,11 +211,30 @@ function archiveStory(int $storyID, $username) {
     $statement->execute();
     $statement->closecursor();
 }
+
+function unarchiveStory(int $storyID) {
+    global $db;
+    $query = "DELETE FROM archive WHERE storyID = :storyID";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $statement->closecursor();
+}
+
 function publishStory(int $storyID, $username) {
     global $db;
     $query = "INSERT INTO `publish` (username, storyID) VALUES (:username, :storyID)";
     $statement = $db->prepare($query);
     $statement->bindValue('username', $username);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->execute();
+    $statement->closecursor();
+}
+
+function unpublishStory(int $storyID) {
+    global $db;
+    $query = "DELETE FROM publish WHERE storyID = :storyID";
+    $statement = $db->prepare($query);
     $statement->bindValue(':storyID', $storyID);
     $statement->execute();
     $statement->closecursor();
