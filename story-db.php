@@ -250,4 +250,14 @@ function getCreator($storyID){
     $statement->closecursor();
     return $results[0]['username'];
 }
+function addComment(int $storyID, $username, $comment_text) {
+    global $db;
+    $query = "INSERT INTO `comment` (username, storyID, comment_text) VALUES (:username, :storyID, :comment)";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':storyID', $storyID);
+    $statement->bindValue(':comment', $comment_text);
+    $statement->execute();
+    $statement->closecursor();
+}
 ?>
