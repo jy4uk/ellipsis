@@ -134,7 +134,9 @@ $comments = getComments($_GET['storyID']);
 							<div>
 							<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 								<input type="submit" value="LIKE" name="action" class="btn" <?php echo $style2; ?>/>     
-								<input type="submit" value="DISLIKE" name="action" class="btn" <?php echo $style2; ?>/>      
+								<input type="submit" value="DISLIKE" name="action" class="btn" <?php echo $style2; ?>/> 
+								<input type="text" name="commenttext" id="commenttext" placeholder="Comment... (max 250 characters)" <?php echo $style2; ?>/> 
+								<input type="submit" value="COMMENT" name="action" class="btn" <?php echo $style2; ?>/>    
 								<input type="hidden" name="storyID" value="<?php echo $_GET['storyID']; ?>" />
 								<input type="hidden" name="username" value="<?php echo $_SESSION['user']; ?>" />
 							</form>
@@ -168,6 +170,11 @@ $comments = getComments($_GET['storyID']);
 									}
 									if ($_POST['action'] == 'UNPUBLISH') {
 										unpublishStory($_POST['storyID']);
+										header('Location: storypage.php?storyID=' . $_GET['storyID']);
+									}
+									if ($_POST['action'] == 'COMMENT' && strlen($_POST['commenttext']) > 0) {
+										$comment = trim($_POST['commenttext']);
+										addComment($_POST['storyID'], $_POST['username'], $comment);
 										header('Location: storypage.php?storyID=' . $_GET['storyID']);
 									}
 
