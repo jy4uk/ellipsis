@@ -3,7 +3,7 @@
 
 function getAllStories() {
     global $db;
-    $query = "SELECT storyID, title FROM story";
+    $query = "SELECT storyID, title FROM story order by title";
     $statement = $db->prepare($query);
     // $statement->bindValue(':user', $user);
     $statement->execute();
