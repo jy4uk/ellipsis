@@ -1,6 +1,6 @@
 # Ellipsis - A collaborative story writing platform
 
-**Due to database maintanence costs, this repository is no longer maintained
+**Due to database maintanence costs, this repository is no longer maintained**
 
 ## Summary 
 Ellipsis was developed as a project to allow individuals to write stories with other people. Users can create their accounts and make new stories or add to existing stories. There is a dedicated archive and publish function available to the original creator of the story
